@@ -1,8 +1,5 @@
-from numpy import asarray
-from numpy import exp
-from numpy.random import randn
-from numpy.random import rand
-
+from numpy import asarray, exp
+from numpy.random import randn, rand, seed
 
 def objective(x):
     return -3 * x[0] ** 5 + 3 * x[0] ** 4 + 5 * x[0] ** 3 - 3 * x[0] ** 2 - x[0]
@@ -35,6 +32,7 @@ def simulated_annealing(objective, bounds, iterations, step, temp):
 
 
 if __name__ == '__main__':
+    seed(1)
     bounds = asarray([[-1.5, 1.5]])
     n_iterations = 1000
     step_size = 0.2
