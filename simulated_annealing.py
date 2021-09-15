@@ -5,18 +5,18 @@ from numpy.random import rand
 
 
 def objective(x):
-    return -3 * x[0] ** 5 + 3 * x[0] ** 4 + 5 * x[0] ** 3 - 3 * x[0] ** 2 + x[0]
+    return -3 * x[0] ** 5 + 3 * x[0] ** 4 + 5 * x[0] ** 3 - 3 * x[0] ** 2 - x[0]
 
 
-def simulated_annealing(objective, bounds, n_iterations, step_size, temp):
+def simulated_annealing(objective, bounds, iterations, step, temp):
     best = bounds[:, 0] + rand(len(bounds)) * (bounds[:, 1] - bounds[:, 0])
     best_eval = objective(best)
     curr, curr_eval = best, best_eval
     scores = list()
 
-    for i in range(n_iterations):
+    for i in range(iterations):
 
-        candidate = curr + randn(len(bounds)) * step_size
+        candidate = curr + randn(len(bounds)) * step
         candidate_eval = objective(candidate)
 
         if candidate_eval < best_eval:
@@ -35,10 +35,10 @@ def simulated_annealing(objective, bounds, n_iterations, step_size, temp):
 
 
 if __name__ == '__main__':
-    bounds = asarray([[-5.0, 5.0]])
+    bounds = asarray([[-1.5, 1.5]])
     n_iterations = 1000
-    step_size = 0.1
-    temp = 10
+    step_size = 0.2
+    temp = 100
     best, score, scores = simulated_annealing(objective, bounds, n_iterations, step_size, temp)
     print('Done!')
     print('f(%s) = %f' % (best, score))
